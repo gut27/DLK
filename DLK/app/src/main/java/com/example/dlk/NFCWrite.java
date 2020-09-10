@@ -19,7 +19,7 @@ public class NFCWrite extends AppCompatActivity {
 
     private NfcAdapter nfcAdapter;
     private PendingIntent pendingIntent;
-    String nfcwrite_information = "";
+    String nfcwrite_information = "DLK,";
     Intent main_setting = new Intent(this.getIntent());
 
     @Override
@@ -29,9 +29,9 @@ public class NFCWrite extends AppCompatActivity {
 
         String setting[] = main_setting.getStringArrayExtra("setting");
         for(int i = 0; i <4; i++){
-            nfcwrite_information += setting[i];
+            nfcwrite_information = setting[i] + "," ;
         }
-        nfcwrite_information += main_setting.getStringExtra("password");
+        nfcwrite_information = main_setting.getStringExtra("password")+",";
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         Intent intent = new Intent(this, getClass()).addFlags(
