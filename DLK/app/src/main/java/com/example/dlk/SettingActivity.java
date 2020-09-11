@@ -21,7 +21,7 @@ public class SettingActivity extends AppCompatActivity {
         actionBar.show();
         actionBar.setTitle("마스킹 설정");
 
-        final Intent intent_password = new Intent(SettingActivity.this, SettingActivity.class);
+        final Intent intent_password = new Intent(SettingActivity.this, PasswordActivity.class);
 
         CheckBox camera = (CheckBox) findViewById(R.id.check_camera);
 

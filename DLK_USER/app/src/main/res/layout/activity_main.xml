@@ -11,6 +11,7 @@
         android:id="@+id/check"
         android:layout_width="184dp"
         android:layout_height="178dp"
+        android:layout_marginTop="160dp"
         android:layout_marginBottom="56dp"
         app:layout_constraintBottom_toTopOf="@+id/finish"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,14 +22,16 @@
         app:srcCompat="@drawable/uncheck" />
 
     <Button
-        android:id="@+id/finish"
+        android:id="@+id/go_finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="260dp"
-        android:text="Button"
+        android:fontFamily="@font/nanumgothic"
+        android:text="종료"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toBottomOf="@+id/check" />
 </androidx.constraintlayout.widget.ConstraintLayout>

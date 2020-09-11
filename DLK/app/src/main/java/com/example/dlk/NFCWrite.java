@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class NFCWrite extends AppCompatActivity {
@@ -20,16 +21,22 @@ public class NFCWrite extends AppCompatActivity {
     private NfcAdapter nfcAdapter;
     private PendingIntent pendingIntent;
     String nfcwrite_information = "DLK,";
-    Intent main_setting = new Intent(this.getIntent());
+    Intent main_setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfcwrite);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.show();
+        actionBar.setTitle("NFC 정보 입력");
+
+        main_setting = new Intent(this.getIntent());
+
         String setting[] = main_setting.getStringArrayExtra("setting");
-        for(int i = 0; i <4; i++){
-            nfcwrite_information = setting[i] + "," ;
+        for(int i = 0; i <setting.length; i++){
+            nfcwrite_information = setting[i] + ",";
         }
         nfcwrite_information = main_setting.getStringExtra("password")+",";
 

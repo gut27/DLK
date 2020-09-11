@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:textColorPrimary">#FFFFFF</item>
-        <item name="android:fontFamily">@font/seoulmountinEB.ttf</item>
+        <item name="android:fontFamily">@font/nanumgothicextrabold</item>
     </style>
     <style name="SplashTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">@drawable/image_splash</item>

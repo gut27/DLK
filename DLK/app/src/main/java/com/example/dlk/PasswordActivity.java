@@ -6,21 +6,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class PasswordActivity extends AppCompatActivity {
 
-    EditText password = findViewById(R.id.password);
+    EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.show();
+        actionBar.setTitle("비밀번호 설정");
+
         Intent main_setting = new Intent(this.getIntent());
 
         final Intent intent_nfcwrite = new Intent(PasswordActivity.this, NFCWrite.class);
         intent_nfcwrite.putExtra("setting", main_setting.getStringArrayExtra("setting"));
+
+        password = findViewById(R.id.password);
 
         Button input = findViewById(R.id.input_password);
         input.setOnClickListener(new View.OnClickListener() {

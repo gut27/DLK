@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private NfcAdapter nfcAdapter;
     private PendingIntent pendingIntent;
     String information[] = new String[5];
-    Button finish = (Button)findViewById(R.id.finish);
-    ImageView check = (ImageView)findViewById(R.id.check);
+    Button finish;
+    ImageView check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         actionBar.show();
         actionBar.setTitle("마스킹 실행");
 
+        check = (ImageView)findViewById(R.id.check);
+        finish = (Button)findViewById(R.id.go_finish);
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

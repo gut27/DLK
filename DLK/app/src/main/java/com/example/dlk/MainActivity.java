@@ -1,5 +1,6 @@
 package com.example.dlk;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,8 +15,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent main = new Intent(this.getIntent());
-        String value = main.getStringExtra("where");
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.show();
+        actionBar.setTitle("홈");
 
         Button start_setting = findViewById(R.id.start_setting);
         start_setting.setOnClickListener(new View.OnClickListener() {
@@ -26,31 +28,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        Button tag_write = findViewById(R.id.tag_write);
-        tag_write.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_nfcwrite = new Intent(MainActivity.this, NFCWrite.class);
-                startActivity(intent_nfcwrite);
-            }
-        });
-
-        Button restart_setting = findViewById(R.id.restart_setting);
-        start_setting.setOnClickListener(new View.OnClickListener() {
-            @restart_setting
-            public void onClick(View view) {
-                Intent intent_resetting = new Intent(MainActivity.this, SettingActivity.class);
-                startActivity(intent_resetting);
-            }
-        });
-
-         */
-
-        if(value == "splash"){
-            start_setting.setEnabled(true);
-        }else{
-            start_setting.setEnabled(false);
-        }
     }
 }

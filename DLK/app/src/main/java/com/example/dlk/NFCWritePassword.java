@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class NFCWritePassword extends AppCompatActivity {
@@ -25,6 +26,10 @@ public class NFCWritePassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfcwritepassword);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.show();
+        actionBar.setTitle("NFC 비밀번호 입력");
+
         Intent password = new Intent(this.getIntent());
         nfcwrite_information = password.getStringExtra("password");
 
@@ -37,6 +42,7 @@ public class NFCWritePassword extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //패스워드까지 라이트 한후 종료시킬지 메인으로 보낼지
                 Intent start_main = new Intent(NFCWritePassword.this, MainActivity.class);
                 startActivity(start_main);
                 NFCWritePassword.this.finish();

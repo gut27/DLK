@@ -20,7 +20,6 @@ public class SplashActivity extends Activity {
     private class splashhandler implements Runnable{
         public void run(){
             Intent intent_main = new Intent(getApplication(), MainActivity.class);
-            intent_main.putExtra("where", "splash");
             startActivity(intent_main); //로딩이 끝난 후, ChoiceFunction 이
             SplashActivity.this.finish(); // 로딩페이지 Activity stack에서 제거
         }
