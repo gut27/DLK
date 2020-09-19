@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setTitle("마스킹 실행");
 
         check = (ImageView)findViewById(R.id.check);
+
         finish = (Button)findViewById(R.id.go_finish);
         finish.setOnClickListener(new View.OnClickListener() {
             @Override

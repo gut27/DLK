@@ -16,6 +16,7 @@ public class Masking extends Service {
 //앱이 종료된 후에도 항상 마스킹 기능은 켜져 있어야 해서 sevice를 상속받았다.
 //마스킹디자인 정해야 함
     //이거 더 나은 코드 있는지 확인하기
+    //다른 그림 위에 그리기 맨 위에 그리기
 
     private View onTopView;//항상 보이게 할 뷰
     private WindowManager manager;//스크린에 직접 뷰를 띄우기 위해 Windoe Manager사용

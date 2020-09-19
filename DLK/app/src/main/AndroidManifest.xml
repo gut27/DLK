@@ -19,8 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".NFCWrite"></activity>
-        <activity android:name=".NFCWritePassword"></activity>
+        <activity android:name=".NFC_Write.NFCWritePassword"></activity>
+        <activity android:name=".NFC_Write.NFCWriteSetting"></activity>
+        <activity android:name=".NFC_Write.ChoiceActivity"></activity>
         <activity android:name=".PasswordActivity"></activity>
         <activity android:name=".SettingActivity"></activity>
     </application>
