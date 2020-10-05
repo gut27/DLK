@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.IBinder;
@@ -14,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+
+import androidx.core.app.NotificationCompat;
 
 
 public class Masking extends Service {
@@ -33,6 +36,39 @@ public class Masking extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            final String strId = getString(R.string.noti_channel_id);
+            final String strTitle = getString(R.string.app_name);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationChannel channel = notificationManager.getNotificationChannel(strId);
+            if (channel == null) {
+                channel = new NotificationChannel(strId, strTitle, NotificationManager.IMPORTANCE_HIGH);
+                notificationManager.createNotificationChannel(channel);
+            }
+
+            Notification notification = new NotificationCompat.Builder(this, strId)
+                    .setSmallIcon(R.drawable.icon)
+                    .setContentTitle("제목")
+                    .setContentText("내용")
+                    .build();
+            startForeground(1, notification);
+        }else{
+            NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+            String NOTIFICATION_CHANNEL_ID = "10001";
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.icon)) //BitMap 이미지 요구
+                    .setContentTitle("상태바 드래그시 보이는 타이틀")
+                    .setContentText("상태바 드래그시 보이는 서브타이틀")
+                    // 더 많은 내용이라서 일부만 보여줘야 하는 경우 아래 주석을 제거하면 setContentText에 있는 문자열 대신 아래 문자열을 보여줌
+                    //.setStyle(new NotificationCompat.BigTextStyle().bigText("더 많은 내용을 보여줘야 하는 경우..."))
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)// 사용자가 노티피케이션을 탭시 ResultActivity로 이동하도록 설정
+                    .setAutoCancel(true);
+
+      builder.setSmallIcon(R.mipmap.ic_launcher); // Oreo 이하에서 mipmap 사용하지 않으면 Couldn't create icon: StatusBarIcon 에러남
+
+            assert notificationManager != null;
+            notificationManager.notify(1234, builder.build()); // 고유숫자로 노티피케이션 동작시킴
+        }
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         onTopView = inflater.inflate(R.layout.masking, null);
@@ -40,8 +76,8 @@ public class Masking extends Service {
 
         //윈도우 레이아웃 파라미터 생성 및 설정 넣기 위한 설정
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
+                500,
+                500,
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.O?
                         WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY : WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
                 // Android O 이상인 경우 TYPE_APPLICATION_OVERLAY 로 설정
