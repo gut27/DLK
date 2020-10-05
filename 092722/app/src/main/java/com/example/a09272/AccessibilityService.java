@@ -19,21 +19,21 @@ public class AccessibilityService extends android.accessibilityservice.Accessibi
 // 이벤트가 발생할때마다 실행되는 부분
 @Override
 public void onAccessibilityEvent(AccessibilityEvent event) {
-        String packageName = String.valueOf(event.getPackageName());//;
-        if(Arrays.asList(Drop).contains(packageName) || packageName.contains("camera")){
-
-        }
-        else if(Arrays.asList(Masking).contains(packageName)){//com.android.chrome com.microsoft.office.powerpoint com.microsoft.office.word  com.android.mms com.google.android.gm    com.android.vending          wooribank
-                Integer num = event.getEventType();
-                Log.e(TAG, String.valueOf(num));
-                if(num == 32 || num == 8192){
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                startForegroundService(new Intent(this, Masking.class));
-                        } else {
-                                startService(new Intent(this, Masking.class));
-                        }
-                }
-        }
+//        String packageName = String.valueOf(event.getPackageName());//;
+//        if(Arrays.asList(Drop).contains(packageName) || packageName.contains("camera")){
+//
+//        }
+//        else if(Arrays.asList(Masking).contains(packageName)){//com.android.chrome com.microsoft.office.powerpoint com.microsoft.office.word  com.android.mms com.google.android.gm    com.android.vending          wooribank
+//                Integer num = event.getEventType();
+//                Log.e(TAG, String.valueOf(num));
+//                if(num == 32 || num == 8192){
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                                startForegroundService(new Intent(this, Masking.class));
+//                        } else {
+//                                startService(new Intent(this, Masking.class));
+//                        }
+//                }
+//        }
         Log.e(TAG, "Catch Event Package Name : " + event.getPackageName());
         Log.e(TAG, "Catch Event TEXT : " + event.getText());
         Log.e(TAG, "Catch Event ContentDescription : " + event.getContentDescription());
