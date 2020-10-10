@@ -2,19 +2,36 @@ package com.example.dlk_user;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
+import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.Settings;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.util.List;
 
 import static android.view.View.VISIBLE;
 
@@ -26,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     String information[] = new String[5];
     Button finish;
     ImageView check;
-
+    ImageView floatingView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,9 +93,11 @@ public class MainActivity extends AppCompatActivity {
             information = text.split(",");
             //이 앱을 키고 다른 NFCtag를 읽었을때의 예외 처리
             if(information[0] == "DLK"){
-                openView();
+                keyboardcheck();
                 check.setImageResource(R.drawable.cheked);
                 finish.setVisibility(VISIBLE);
+                popup();
+                openView();
             }else{
                 check.setImageResource(R.drawable.uncheck);
                 finish.setVisibility(View.GONE);
@@ -86,12 +105,69 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    private int REQUEST_TEST = 1;
+    public void keyboardcheck(){
+        Intent intent_keycheck = new Intent(getApplication(), KeyboardCheckActivity.class);
+        startActivityForResult(intent_keycheck, REQUEST_TEST);
+
+    }
+
+    public void popup()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("인사말").setMessage("본문");
+        builder.setPositiveButton("동의", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int id)
+            {
+                Toast.makeText(getApplicationContext(), "OK Click", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("거절", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int id)
+            {
+                Toast.makeText(getApplicationContext(), "Cancel Click", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+
+        alertDialog.show();
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Context context = getApplicationContext();
+        if (requestCode == REQUEST_TEST) {
+            if (resultCode == RESULT_OK) {
+                PreferenceManager.setString(context, "height", data.getStringExtra("height"));
+            } else {   // RESULT_CANCEL
+                PreferenceManager.setString(context, "height", data.getStringExtra("height"));
+            }
+        }
+    }
+
 
     public void openView() {
         if (Settings.canDrawOverlays(this))//Overlay사용가능여부 체크
-            startService(new Intent(this, Masking.class));
+            //startService(new Intent(this, Masking.class));
+        {}
         else
             onObtainingPermissionOverlayWindow();//다른 앱위에 그리기 권한 획득 창이 나타나는 함수를 부른다.
+
+        // 접근성 권한이 없으면 접근성 권한 설정하는 다이얼로그 띄워주는 부분
+        if(!checkAccessibilityPermissions()) {
+            setAccessibilityPermissions();
+        }
+
+
     }
 
     //안드로이드 6.0 부터 화면 오버레이 권한 설정을 Manifest 입력만으로는 사용 못하게 막아서 아래 코드를 사용한다.
@@ -99,5 +175,37 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
         //Settings.ACTION_MANAGE_OVERLAY_PERMISSION에 현재 패키지 명을 넘겨 설정화면을 노출하게 한다.
         startActivityForResult(intent, REQ_CODE_OVERLAY_PERMISSION);
+    }
+    // 접근성 권한이 있는지 없는지 확인하는 부분
+    // 있으면 true, 없으면 false
+    public boolean checkAccessibilityPermissions() {
+        AccessibilityManager accessibilityManager = (AccessibilityManager) getSystemService(Context.ACCESSIBILITY_SERVICE);
+
+        // getEnabledAccessibilityServiceList는 현재 접근성 권한을 가진 리스트를 가져오게 된다
+        List<AccessibilityServiceInfo> list = accessibilityManager.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.DEFAULT);
+
+        for (int i = 0; i < list.size(); i++) {
+            AccessibilityServiceInfo info = list.get(i);
+
+            // 접근성 권한을 가진 앱의 패키지 네임과 패키지 네임이 같으면 현재앱이 접근성 권한을 가지고 있다고 판단함
+            if (info.getResolveInfo().serviceInfo.packageName.equals(getApplication().getPackageName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // 접근성 설정화면으로 넘겨주는 부분
+    public void setAccessibilityPermissions() {
+        AlertDialog.Builder gsDialog = new AlertDialog.Builder(this);
+        gsDialog.setTitle("접근성 권한 설정");
+        gsDialog.setMessage("접근성 권한을 필요로 합니다");
+        gsDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // 설정화면으로 보내는 부분
+                startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
+                return;
+            }
+        }).create().show();
     }
 }
