@@ -1,6 +1,7 @@
 package com.example.dlk.NFC_Write;
 
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -8,6 +9,7 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.dlk.PreferenceManager;
 import com.example.dlk.R;
 
 public class NFCWriteSetting extends AppCompatActivity {
@@ -31,8 +34,19 @@ public class NFCWriteSetting extends AppCompatActivity {
         actionBar.show();
         actionBar.setTitle("입구용 NFC 생성");
 
-        Intent main_setting = new Intent(this.getIntent());
-        nfcwrite_information = main_setting.getStringExtra("setting");
+//        Intent main_setting = new Intent(this.getIntent());
+//        nfcwrite_information = main_setting.getStringExtra("setting");
+        Context context = getApplicationContext();
+        nfcwrite_information = "FLARE_Entrance,"
+                +PreferenceManager.getString(context,"camera") +","
+                +PreferenceManager.getString(context,"hifirecorder") +","
+                +PreferenceManager.getString(context,"kakaotalk") +","
+                +PreferenceManager.getString(context,"chrome") +","
+                +PreferenceManager.getString(context,"mms") +","
+                +PreferenceManager.getString(context,"pp") +","
+                +PreferenceManager.getString(context,"word") +","
+                +PreferenceManager.getString(context,"gm") +","
+                +PreferenceManager.getString(context,"password");
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         Intent intent = new Intent(this, getClass()).addFlags(

@@ -1,6 +1,7 @@
 package com.example.dlk.NFC_Write;
 
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dlk.MainActivity;
+import com.example.dlk.PreferenceManager;
 import com.example.dlk.R;
 
 public class NFCWritePassword extends AppCompatActivity {
@@ -33,8 +35,12 @@ public class NFCWritePassword extends AppCompatActivity {
         actionBar.show();
         actionBar.setTitle("출구용 NFC 생성");
 
-        Intent password = new Intent(this.getIntent());
-        nfcwrite_information = password.getStringExtra("password");
+//        Intent password = new Intent(this.getIntent());
+//        nfcwrite_information = password.getStringExtra("password");
+
+        Context context = getApplicationContext();
+        nfcwrite_information = "FLARE_Exit,"
+                +PreferenceManager.getString(context,"password");
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         Intent intent = new Intent(this, getClass()).addFlags(

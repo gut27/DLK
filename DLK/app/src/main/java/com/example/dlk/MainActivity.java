@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+//import com.example.dlk.service.FloatWindow;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.show();
         actionBar.setTitle("홈");
+
 
         Button start_setting = findViewById(R.id.start_setting);
         start_setting.setOnClickListener(new View.OnClickListener() {

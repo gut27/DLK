@@ -1,5 +1,6 @@
 package com.example.dlk;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +32,7 @@ public class PasswordActivity extends AppCompatActivity {
 
         final Intent intent_nfcwrite = new Intent(PasswordActivity.this, ChoiceActivity.class);
         intent_nfcwrite.putExtra("setting", main_setting.getStringArrayExtra("setting"));
-
+        final Context context = getApplicationContext();
         password = findViewById(R.id.password);
 
         Button input = findViewById(R.id.input_password);
@@ -44,7 +45,8 @@ public class PasswordActivity extends AppCompatActivity {
                 }else if(!Pattern.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*#&]).{6,10}.$", pass_num)) {
                     Toast.makeText(getApplicationContext(), "비밀번호 형식을 지켜주세요.", Toast.LENGTH_LONG).show();
                 }else{
-                    intent_nfcwrite.putExtra("password", pass_num);
+                    PreferenceManager.setString(context, "password", pass_num);
+                    //intent_nfcwrite.putExtra("password", pass_num);
                     startActivity(intent_nfcwrite);
                 }
             }

@@ -28,21 +28,21 @@ public class ChoiceActivity extends AppCompatActivity {
         actionBar.show();
         actionBar.setTitle("NFC태그 만들기");
 
-        settings = new Intent(this.getIntent());
-
-        String setting[] = settings.getStringArrayExtra("setting");
-        for(int i = 0; i <setting.length; i++){
-            setting_information = setting[i] + ",";
-        }
-        setting_information += settings.getStringExtra("password");
-        password_information = settings.getStringExtra("password");
+//        settings = new Intent(this.getIntent());
+//
+//        String setting[] = settings.getStringArrayExtra("setting");
+//        for(int i = 0; i <setting.length; i++){
+//            setting_information = setting[i] + ",";
+//        }
+//        setting_information += settings.getStringExtra("password");
+//        password_information = settings.getStringExtra("password");
 
         Button entrance = findViewById(R.id.entrance);
         entrance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent entrance = new Intent(ChoiceActivity.this, NFCWriteSetting.class);
-                entrance.putExtra("setting", setting_information);
+                //entrance.putExtra("setting", setting_information);
                 startActivity(entrance);
             }
         });
@@ -52,7 +52,7 @@ public class ChoiceActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent exit = new Intent(ChoiceActivity.this, NFCWritePassword.class);
-                exit.putExtra("password", password_information);
+                //exit.putExtra("password", password_information);
                 startActivity(exit);
             }
         });

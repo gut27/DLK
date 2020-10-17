@@ -2,6 +2,7 @@ package com.example.dlk_user;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
@@ -10,49 +11,71 @@ import android.view.accessibility.AccessibilityEvent;
 import java.util.Arrays;
 
 public class AccessibilityService extends android.accessibilityservice.AccessibilityService {
-        private static final String TAG = "AccessibilityService";
-        private static final int REQ_CODE_OVERLAY_PERMISSION = 1;//마스킹 뷰 실행을 위한 변수
-        String[] Drop = {"com.lge.hifirecorder", "com.android.incallui", "com.android.contacts"};
-        String[] Masking = {"com.kakao.talk", "com.android.chrome", "com.microsoft.office.powerpoint", "com.microsoft.office.word", "com.android.mms", "com.google.android.gm", "com.android.vending"};//sns 패키지 명도 추가
-// 이벤트가 발생할때마다 실행되는 부분
-@Override
-public void onAccessibilityEvent(AccessibilityEvent event) {
-        String packageName = String.valueOf(event.getPackageName());//;
-        if(Arrays.asList(Drop).contains(packageName) || packageName.contains("camera")){
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        startForegroundService(new Intent(this, MaskingService2.class));
-                } else {
-                        startService(new Intent(this, MaskingService2.class));
-                }
+        // !--드롭이나 마스킹 하고싶은 앱이 있을경우 뒤에 패키지명 만 추가하면 원하는 기능 수행 가능
+        String[] Masking = new String[5];
+        Context context;
+        private static android.accessibilityservice.AccessibilityService accessibilityService = null;
+
+        @Override
+        public void onCreate() {
+                super.onCreate();
+                Keyboardcontrol.setAccessibilityService(this,0);
+                context = getApplicationContext();
+                Masking[0] = PreferenceManager.getString(context, "kakaotalk");
+                Masking[1] = PreferenceManager.getString(context, "mms");
+                Masking[2] = PreferenceManager.getString(context, "pp");
+                Masking[3] = PreferenceManager.getString(context, "word");
+                Masking[4] = PreferenceManager.getString(context, "gm");
         }
-        else if(Arrays.asList(Masking).contains(packageName)){
-                Integer num = event.getEventType();
-                Log.e(TAG, String.valueOf(num));
-                if((num == 32 && num == 8192)|| num == 8192){
+
+         //이벤트가 발생할때마다 실행되는 부분
+
+        @Override
+        public void onAccessibilityEvent(AccessibilityEvent event) {
+                String packageName = String.valueOf(event.getPackageName());//;
+                Log.e("name", packageName);
+                if(packageName.contains(PreferenceManager.getString(context,"camera")) || packageName.contains(PreferenceManager.getString(context,"hifirecorder"))){
+                        Log.e("dfsf","d3333333333333376");
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                Log.e("dfsf","11fgerdgdg");
+                                Log.e("dfsf","11");
                                 startForegroundService(new Intent(this, MaskingService.class));
                         } else {
+                                Log.e("dfsf","11fgerdgdg");
+                                Log.e("dfsf","11");
+
                                 startService(new Intent(this, MaskingService.class));
                         }
                 }
-        }
-}
+                else if(Arrays.asList(Masking).contains(packageName)){
+                        PreferenceManager.setString(context, "case", "1");
+                        Keyboardcontrol.setAccessibilityService(this, 1);
+                } else {
+                        Keyboardcontrol.setAccessibilityService(this, 0);
 
+                        if(!packageName.contains("dlk_user")){
+                                closeView();
+                        }
+                }
+        }
+        public void closeView() {
+                stopService(new Intent(this, MaskingService.class));
+        }
 // 접근성 권한을 가지고, 연결이 되면 호출되는 함수
-public void onServiceConnected() {
-        AccessibilityServiceInfo info = new AccessibilityServiceInfo();
+        public void onServiceConnected() {
 
-        info.eventTypes = AccessibilityEvent.TYPES_ALL_MASK; // 전체 이벤트 가져오기
-        info.feedbackType = AccessibilityServiceInfo.DEFAULT | AccessibilityServiceInfo.FEEDBACK_HAPTIC;
-        info.notificationTimeout = 100; // millisecond
-
-        setServiceInfo(info);
+                AccessibilityServiceInfo info = new AccessibilityServiceInfo();
+                Log.e("name", "3252");
+                info.eventTypes = AccessibilityEvent.TYPES_ALL_MASK; // 전체 이벤트 가져오기
+                info.feedbackType = AccessibilityServiceInfo.DEFAULT | AccessibilityServiceInfo.FEEDBACK_GENERIC;
+                info.notificationTimeout = 100; // millisecond
+                info.flags = AccessibilityServiceInfo.FLAG_REQUEST_FILTER_KEY_EVENTS;
+                setServiceInfo(info);
         }
 
-@Override
-public void onInterrupt() {
-        // TODO Auto-generated method stub
-        Log.e("TEST", "OnInterrupt");
-        }
-
+        @Override
+        public void onInterrupt() {
+                // TODO Auto-generated method stub
+                Log.e("TEST", "OnInterrupt");
+                }
 }

@@ -3,8 +3,5 @@
     <!-- Accessibility -->
     <string name="accessibility_description">접근성 권한을 필요로 합니다.</string>
     <string name="noti_channel_id">Flare가 내부정보 유출 여부를 감시중입니다.</string>
-    <!--keyboard-->
-    <string name="info">CLick the back button to close the keyboard, click the EditText to open it again.</string>
-    <string name="height">Keyboard height (pixels):</string>
 
 </resources>

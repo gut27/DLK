@@ -40,12 +40,6 @@ public class MaskingService extends Service {
     public void onCreate() {
         super.onCreate();
 
-
-        //안될 수 있음 그럴경우 2안을 사용 근데 안될것 같음 ㅋ
-        Context context = getApplicationContext();
-        String Height = PreferenceManager.getString(context,"height");
-        Integer height = Integer.valueOf(Height);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             final String strId = getString(R.string.noti_channel_id);
             final String strTitle = getString(R.string.app_name);
@@ -74,7 +68,7 @@ public class MaskingService extends Service {
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)// 사용자가 노티피케이션을 탭시 ResultActivity로 이동하도록 설정
                     .setAutoCancel(true);
 
-            builder.setSmallIcon(R.mipmap.ic_launcher); // Oreo 이하에서 mipmap 사용하지 않으면 Couldn't create icon: StatusBarIcon 에러남
+            builder.setSmallIcon(R.drawable.noti_icon); // Oreo 이하에서 mipmap 사용하지 않으면 Couldn't create icon: StatusBarIcon 에러남
 
             assert notificationManager != null;
             notificationManager.notify(1234, builder.build()); // 고유숫자로 노티피케이션 동작시킴
@@ -87,7 +81,7 @@ public class MaskingService extends Service {
         //윈도우 레이아웃 파라미터 생성 및 설정 넣기 위한 설정
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                height,
+                ViewGroup.LayoutParams.MATCH_PARENT,
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.O?
                         WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY : WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
                 // Android O 이상인 경우 TYPE_APPLICATION_OVERLAY 로 설정
@@ -102,15 +96,15 @@ public class MaskingService extends Service {
         manager.addView(onTopView, params);//윈도우에 뷰를 추가 하였다.
 
         startForeground(1, new Notification());
-
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                onDestroy();
-            }
-        };
-       Timer timer = new Timer();
-       timer.schedule(timerTask, 10000, 10000);
+//
+//        TimerTask timerTask = new TimerTask() {
+//            @Override
+//            public void run() {
+//                onDestroy();
+//            }
+//        };
+//        Timer timer = new Timer();
+//        timer.schedule(timerTask, 10000, 10000);
 
     }
 

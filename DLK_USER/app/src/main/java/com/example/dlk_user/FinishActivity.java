@@ -1,13 +1,20 @@
 package com.example.dlk_user;
 
+import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,17 +22,17 @@ import android.widget.ImageView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
+import static android.view.View.VISIBLE;
+
 
 public class FinishActivity extends AppCompatActivity {
-    // 입력 받은 값에서 각 기능에대해 마스킹을 어떻게 할지 어떤 앱이 켜지는지 어떻게 받아올지 혹은 열수있는 앱을 통제하는 식으로 할건지
-    private static final int REQ_CODE_OVERLAY_PERMISSION = 1;//마스킹 뷰 실행을 위한 변수
     private NfcAdapter nfcAdapter;
     private PendingIntent pendingIntent;
-    String information[] = new String[5];
-    Intent intent_password = new Intent(getIntent());
-    String password = intent_password.getStringExtra("password");
-    EditText edit_password = (EditText)findViewById(R.id.password_finish);
-
+    String information[] = new String[2];
+    EditText edit_password;
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,17 +41,24 @@ public class FinishActivity extends AppCompatActivity {
         actionBar.show();
         actionBar.setTitle("앱 종료");
 
-
+        context = getApplicationContext();
+        edit_password = (EditText)findViewById(R.id.password_finish);
         Button input_password = (Button)findViewById(R.id.input_password);
 
         input_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (String.valueOf(edit_password.getText()) ==  password){
-                    closeView();
-                    finishAffinity();
-                    System.runFinalization();
-                    System.exit(0);
+                Log.e("fdf", "fdsf44d");
+                String tp2 = String.valueOf(edit_password.getText());
+                String tp3 = PreferenceManager.getString(context, "password");
+                Log.e("d", tp2 + "3"+tp3);
+
+                if (tp2.equals(tp3)){
+                    Log.e("fdf", "fdsf77777d");
+                    Log.e("fdf", "fdsfsd");
+                    Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
+                    intent1.putExtra("close", "close");
+                    startActivity(intent1);
                 }
                 //비밀번호가 입력안되어 있을경우 토스트와 비밀번호가 틀릴경우 토스트 보내기
             }
@@ -76,16 +90,16 @@ public class FinishActivity extends AppCompatActivity {
             NdefRecord[] rec = msgs.getRecords();
             byte[] bt = rec[0].getPayload();
             String text = new String(bt);
-            if(text == password){
-                closeView();
-                finishAffinity();
-                System.runFinalization();
-                System.exit(0);
-                //크로즈 후 앱을 어떻게 할지도 의논 우선 앱을 종료시키겠음
+            information = text.split(",");
+            if(information[0] == "FLARE_Exit") {
+                if (information[1] == PreferenceManager.getString(context, "password")) {
+                    Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
+                    intent1.putExtra("close", "close");
+                    startActivity(intent1);
+                }
             }
         }
     }
-    public void closeView() {
-        stopService(new Intent(this, Masking.class));
-    }
+
+
 }
