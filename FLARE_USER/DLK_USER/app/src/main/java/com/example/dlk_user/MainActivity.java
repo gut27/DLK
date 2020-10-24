@@ -2,38 +2,28 @@ package com.example.dlk_user;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
-
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.AlertDialog;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.os.Parcelable;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.sql.Time;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -50,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView check;
     Context context;
     Handler handler;
-    Integer counter = 0;
+    Timer timer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,24 +65,33 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(finish);
             }
         });
+
         handler = new Handler();
 
         Intent end_intent = getIntent();
         String tmp = end_intent.getStringExtra("close");
         if(tmp == "close"){
             close();
+
             TimerTask timerTask = new TimerTask() {
                 @Override
                 public void run() {
                     teskkill();
-                    counter++;
                 }
             };
-            Timer timer = new Timer();
-            timer.schedule(timerTask, 10000);
-            if(counter == 1){timer.cancel();}
+            timer = new Timer();
+            timer.schedule(timerTask, 5000);
+
 //앱완전죽이기
         }
+
+        final Handler handler = new Handler(){
+            public void handleMessage(Message msg){
+                // 원래 하려던 동작 (UI변경 작업 등)V
+                check.setImageResource(R.drawable.uncheck);
+                finish.setVisibility(View.INVISIBLE);
+            }
+        };
     }
 
     @Override
@@ -144,13 +143,12 @@ public class MainActivity extends AppCompatActivity {
                     TimerTask timerTask = new TimerTask() {
                         @Override
                         public void run() {
+
                             teskkill();
-                            counter++;
                         }
                     };
-                    Timer timer = new Timer();
-                    timer.schedule(timerTask, 10000);
-                    if(counter == 1){timer.cancel();}
+                    timer = new Timer();
+                    timer.schedule(timerTask, 5000);
 
                 }else{
                     Toast.makeText(context,"입구용 NFC를 먼저 입력해 주십시오.", Toast.LENGTH_LONG).show();
@@ -170,31 +168,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), PopopActivity.class);
         startActivityForResult(intent, 1);
 
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//
-//        builder.setTitle("내부자 정보 유출을 방지하기 위한 보안 어플이 실행 중입니다.").setMessage("App이 활성화 상태가 되어야 하는 상황임에도 불구하고 App을 삭제하여 활성화 시켜 놓지 않은 경우 발생하는 정보 유출 사건과 관련된 불이익은 책임지지 않습니다.");
-//        builder.setPositiveButton("동의", new DialogInterface.OnClickListener(){
-//            @Override
-//            public void onClick(DialogInterface dialog, int id)
-//            {
-//                Toast.makeText(getApplicationContext(), "OK Click", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        builder.setNegativeButton("거절", new DialogInterface.OnClickListener(){
-//            @Override
-//            public void onClick(DialogInterface dialog, int id)
-//            {
-//                Toast.makeText(getApplicationContext(), "Cancel Click", Toast.LENGTH_SHORT).show();
-//                moveTaskToBack(true);						// 태스크를 백그라운드로 이동
-//                finishAndRemoveTask();						// 액티비티 종료 + 태스크 리스트에서 지우기
-//                android.os.Process.killProcess(android.os.Process.myPid());	// 앱 프로세스 종료
-//            }
-//        });
-//
-//        AlertDialog alertDialog = builder.create();
-//
-//        alertDialog.show();
+
     }
 
     public void settings(){
@@ -269,8 +243,9 @@ public class MainActivity extends AppCompatActivity {
     public void teskkill(){
         //접근성 먼저 끄고 꺼져있으면은 이미지 바꾸고 버튼이랑 그 다음에 앱을 완전히 죽이기
         if(checkAccessibilityPermissions() == false) {
-            check.setImageResource(R.drawable.uncheck);
-            finish.setVisibility(View.INVISIBLE);
+            Message msg = handler.obtainMessage();
+            handler.sendMessage(msg);
+            timer.cancel();
             moveTaskToBack(true);						// 태스크를 백그라운드로 이동
             finishAndRemoveTask();						// 액티비티 종료 + 태스크 리스트에서 지우기
             android.os.Process.killProcess(android.os.Process.myPid());
