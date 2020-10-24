@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView_alert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="경고"
+            android:textColor="#585858"
+            android:textSize="25dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="내부자 정보 유출을 방지하기 위해 보안 어플이 실행 중입니다."
+            android:textColor="#585858"
+            android:textSize="20dp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#959595"
+            android:textSize="15dp"
+            android:textAlignment="center"
+            android:paddingBottom="20dp"
+            android:text="App이 활성화 상태가 되어야 하는 상황임에도 불구하고 App을 삭제하여 활성화 시켜 놓지 않은 경우 발생하는 정보 유출 사건과 관련된 불이익은 책임지지 않습니다." />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/agree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="동의"
+            android:background="@drawable/agree"
+            android:textColor="#000000"
+            android:textSize="15dp"
+            android:paddingBottom="20dp"/>
+
+        <Button
+            android:id="@+id/notagree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/agree"
+            android:text="동의안함"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="15dp"
+            android:paddingBottom="20dp"/>
+
+    </LinearLayout>
+</LinearLayout>
