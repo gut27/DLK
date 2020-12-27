@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Flare_Beta</string>
+    <!-- Accessibility -->
+    <string name="accessibility_description">접근성 권한을 필요로 합니다.</string>
+    <string name="noti_channel_id">Flare가 내부정보 유출 여부를 감시중입니다.</string>
+
+</resources>

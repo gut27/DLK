@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/image_background"
+    tools:context="com.example.flare_beta.MainActivity"
+    android:layout_gravity="center">
+
+
+    <TextView
+        android:id="@+id/check"
+        android:layout_width="200dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/image_uncheck"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/yanolja"
+        android:text="" />
+
+    <Button
+        android:id="@+id/button_start"
+        android:layout_width="108dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/image_btn_start"
+        android:gravity="center" />
+</LinearLayout>
