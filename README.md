@@ -16,6 +16,7 @@ Application Version
 - targetSdkVersion : 30
 
 
-instargram: https://www.instagram.com/flare_7272/
-and you can find it on Google Playstore
+instargram: https://www.instagram.com/flare_7272/  
+You can get more information by accessing Instagram.<br />
+and also, you can find these apps on Google Playstore
 
