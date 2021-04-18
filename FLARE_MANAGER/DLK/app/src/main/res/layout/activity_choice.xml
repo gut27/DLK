@@ -3,33 +3,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
 
-    <Button
-        android:id="@+id/entrance"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="251dp"
-        android:text="입구용"
+        android:layout_marginTop="109dp"
+        android:layout_marginBottom="104dp"
+        android:fontFamily="@font/nanumgothic"
+        android:text="생성하기 원하는 NFC를\n 선택하여 주십시요."
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/entrance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/entrance"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+
+        android:layout_marginBottom="63dp"
+        android:background="@drawable/image_btn_entrance"
+        app:layout_constraintBottom_toTopOf="@+id/exit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
         android:id="@+id/exit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
-        android:text="출구용"
-        app:layout_constraintStart_toStartOf="@+id/entrance"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="63dp"
+        android:background="@drawable/image_btn_exit"
+        app:layout_constraintBottom_toTopOf="@+id/finish"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/entrance" />
 
     <Button
         android:id="@+id/finish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="43dp"
-        android:text="종료"
-        app:layout_constraintStart_toStartOf="@+id/exit"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="156dp"
+        android:background="@drawable/image_btn_finish"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exit" />
 </androidx.constraintlayout.widget.ConstraintLayout>

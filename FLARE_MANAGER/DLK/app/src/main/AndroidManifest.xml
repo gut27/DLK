@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.dlk">
+    package="com.dlk.dlk">
 
-    <uses-permission android:name="android.permission.NFC"></uses-permission>
+    <uses-permission android:name="android.permission.NFC" />
     <uses-feature android:name="android.hardware.nfc" android:required="false"></uses-feature>
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_flareicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_flareicon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity"
+        <activity android:name="com.dlk.dlk.SplashActivity"
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -21,12 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".NFC_Write.NFCWritePassword"></activity>
-        <activity android:name=".NFC_Write.NFCWriteSetting"></activity>
-        <activity android:name=".NFC_Write.ChoiceActivity"></activity>
-        <activity android:name=".PasswordActivity"></activity>
-        <activity android:name=".SettingActivity"></activity>
+        <activity android:name="com.dlk.dlk.MainActivity"></activity>
+        <activity android:name="com.dlk.dlk.NFC_Write.NFCWritePassword"></activity>
+        <activity android:name="com.dlk.dlk.NFC_Write.NFCWriteSetting"></activity>
+        <activity android:name="com.dlk.dlk.NFC_Write.ChoiceActivity"></activity>
+        <activity android:name="com.dlk.dlk.PasswordActivity"></activity>
     </application>
 
 </manifest>

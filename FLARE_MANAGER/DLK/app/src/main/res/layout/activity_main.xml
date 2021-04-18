@@ -1,35 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <Button
-        android:id="@+id/start_setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="시작"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.376"
-        android:textColor="#FFFFFF"
-        android:background="#065471"
-        android:fontFamily="@font/nanumgothic" />
+    android:orientation="vertical"
+    android:fontFamily="@font/nanumgothicextrabold"
+    >
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="NFC tag write를 원하시면 시작을 클릭하세요"
-        app:layout_constraintBottom_toTopOf="@+id/start_setting"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.894" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/nanumgothic"
+        android:layout_marginTop="100dp"
+        android:text="사용 제어를 원하는 기능을\n 선택해 주세요."
+        android:textAlignment="center"
+        android:textSize="20dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:textAlignment="center"
+            >
+
+            <CheckBox
+
+                android:paddingLeft="10dp"
+                android:id="@+id/check_camera"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="카메라"
+                android:textSize="20dp"
+                android:textColor="#404040" />
+
+            <CheckBox
+                android:paddingLeft="10dp"
+
+                android:id="@+id/check_hifirecorder"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="녹음"
+                android:textColor="#404040"
+                android:textSize="20dp"/>
+
+            <CheckBox
+                android:paddingLeft="10dp"
+
+                android:id="@+id/check_kakaotalk"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="카카오톡"
+                android:textColor="#404040"
+                android:textSize="20dp"/>
+
+            <CheckBox
+                android:paddingLeft="10dp"
+
+                android:id="@+id/check_chrome"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="크롬"
+                android:textSize="20dp"
+                android:textColor="#404040"/>
+
+            <CheckBox
+                android:paddingLeft="10dp"
+
+                android:id="@+id/check_mms"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#404040"
+
+                android:text="문자메시지" />
+
+            <CheckBox
+                android:paddingLeft="10dp"
+
+                android:id="@+id/check_gm"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textColor="#404040"
+
+                android:textSize="20dp"
+                android:text="gmail" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/setup"
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="100dp"
+        android:layout_weight="1"
+        android:background="@drawable/image_btn_next" />
+</LinearLayout>

@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">09272</string>
-    <!-- Accessibility -->
-    <string name="accessibility_description">접근성 권한을 필요로 합니다.</string>
-    <string name="noti_channel_id">감시중</string>
-
-</resources>
