@@ -20,3 +20,4 @@ instargram: https://www.instagram.com/flare_7272/
 You can get more information by accessing Instagram.<br />
 and also, you can find these apps on Google Playstore
 
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=gut27&repo=github-readme-stats)](https://github.com/anuraghazra/github-readme-stats)
