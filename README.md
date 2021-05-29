@@ -10,10 +10,10 @@ Development Environment
 --------
 - Android Studio @4.0.0
 
-Application Version
+Android Version
 ---------
-- minSdkVersion : 25
-- targetSdkVersion : 30
+- minSdkVersion : Android 7.1.1 (Nougat)
+- targetSdkVersion : Android 11
 
 
 instargram: https://www.instagram.com/flare_7272/  
