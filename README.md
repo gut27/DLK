@@ -12,22 +12,22 @@ FLARE USER	<br />
 • Using this app, the user’s application usage can be controlled by its management in order to prevent leakage of a company’s confidential information.<br />
 * Screen Control techniques is made from AccessibilityService and Overlay.<br />
 
-FLARE MANAGER
-1. Splash screen
-![MANAGER_SPLASH](https://user-images.githubusercontent.com/52551159/120213917-c0193280-c26e-11eb-9862-05339fe8de7a.jpg)
-2. Select application
+FLARE MANAGER<br />
+1. Splash screen<br />
+![MANAGER_SPLASH](https://user-images.githubusercontent.com/52551159/120213917-c0193280-c26e-11eb-9862-05339fe8de7a.jpg){: width="30%" height="70%"}
+2. Select application<br />
 ![MANAGER_1](https://user-images.githubusercontent.com/52551159/120213922-c27b8c80-c26e-11eb-886a-97fe55984524.jpg)
-3. Select password
+3. Select password<br />
 ![MANAGER_2](https://user-images.githubusercontent.com/52551159/120213924-c27b8c80-c26e-11eb-9feb-bbd8d1b49a40.jpg)
-3. Write NFC
+3. Write NFC<br />
 ![MANAGER_3](https://user-images.githubusercontent.com/52551159/120213921-c1e2f600-c26e-11eb-8fff-eff4b708d8c5.jpg)
 </br>
-FLARE USER
-1. Splash screen
+FLARE USER<br />
+1. Splash screen<br />
 ![USER_SPLASH](https://user-images.githubusercontent.com/52551159/120213933-c4455000-c26e-11eb-8433-6ad124d37777.jpg)
-2. Active screen
+2. Active screen<br />
 ![USER1](https://user-images.githubusercontent.com/52551159/120213934-c4dde680-c26e-11eb-8799-ee48f7e5f1b3.jpg)
-3. Inactive screen
+3. Inactive screen<br />
 ![USER2](https://user-images.githubusercontent.com/52551159/120213931-c4455000-c26e-11eb-97bd-aa1ca80804e9.jpg)
 </br>
 Android Version
