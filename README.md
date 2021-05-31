@@ -30,15 +30,16 @@ FLARE USER<br />
 3. Inactive screen<br />
 <img src = "https://user-images.githubusercontent.com/52551159/120213931-c4455000-c26e-11eb-97bd-aa1ca80804e9.jpg" width="30%" height="70%"><br />
 </br>
-Android Version
----------
-- minSdkVersion : Android 7.1.1 (Nougat)
-- targetSdkVersion : Android 11
 
-Development Environment
---------
-- Android Studio @4.0.0
-
+Android Version</br>
+---------</br>
+- minSdkVersion : Android 7.1.1 (Nougat)</br>
+- targetSdkVersion : Android 11</br>
+</br>
+Development Environment</br>
+--------</br>
+- Android Studio @4.0.0</br>
+</br>
 instargram: https://www.instagram.com/flare_7272/  
 You can get more information by accessing Instagram.<br />
 and also, you can find these apps on Google Playstore
