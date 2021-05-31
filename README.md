@@ -15,6 +15,7 @@ FLARE USER	<br />
 FLARE MANAGER<br />
 1. Splash screen<br />
 ![MANAGER_SPLASH](https://user-images.githubusercontent.com/52551159/120213917-c0193280-c26e-11eb-9862-05339fe8de7a.jpg){: width="30" height="70"}
+<img src = "https://user-images.githubusercontent.com/52551159/120213917-c0193280-c26e-11eb-9862-05339fe8de7a.jpg" width="30" height="70">
 2. Select application<br />
 ![MANAGER_1](https://user-images.githubusercontent.com/52551159/120213922-c27b8c80-c26e-11eb-886a-97fe55984524.jpg)
 3. Select password<br />
