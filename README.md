@@ -40,6 +40,6 @@ Development Environment</br>
 --------</br>
 - Android Studio @4.0.0</br>
 </br>
-instargram: https://www.instagram.com/flare_7272/  
+instargram: https://www.instagram.com/p/CMEgoOXn9Pm/ ,https://www.instagram.com/p/CMEg75tnMtK/
 You can get more information by accessing Instagram.<br />
 and also, you can find these apps on Google Playstore
