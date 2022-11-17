@@ -42,4 +42,4 @@ Development Environment</br>
 </br>
 instargram: https://www.instagram.com/p/CMEgoOXn9Pm/ ,https://www.instagram.com/p/CMEg75tnMtK/
 You can get more information by accessing Instagram.<br />
-and also, you can find these apps on Google Playstore
+and also, you can find these apps on Google Playstore. (But Flare MANAGER was deprecated)
